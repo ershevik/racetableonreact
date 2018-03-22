@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>race</title>
+   <!--<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id='content'></div>
+
+    <script type="text/babel">
+
+        var CONTACTS = [
+            {
+                id: 1,
+                name: 'Гонщик 1',
+                positon: '2',
+                image: 'http://cars--reviews.com/images/dodge-epic/dodge-epic-30.jpg',
+                time: '320'
+            }, {
+                id: 2,
+                name: 'Гонщик 2',
+                positon: '1',
+                image: 'https://media.giphy.com/media/gz0AlkcOXzwha/giphy.gif',
+                time: '310'
+            }, {
+                id: 3,
+                name: 'Гонщик 3',
+                positon: '3',
+                image: 'https://thumbs.gfycat.com/UnrealisticLargeBasil-max-1mb.gif',
+                time: '330'
+            }
+        ];
+     
+        var Contact = React.createClass({
+            render: function() {
+                return (
+                    <li className="contact">
+                        <img className="contact-image" src={this.props.image} width="150px" height="100px" />
+                        <div className="contact-info">
+                            <div className="contact-name"> {this.props.name} </div>
+                            <div className="contact-number"> {this.props.positon} </div>
+                            <div className="time"> {this.props.time} msec</div>
+                        </div>
+                    </li>
+                );
+            }
+        });
+
+        var ContactsList = React.createClass({
+            getInitialState: function() {
+                return {
+                    displayedContacts: CONTACTS
+                };
+            },
+
+            handleSearch: function(event) {
+                var searchQuery = event.target.value.toLowerCase();
+                var displayedContacts = CONTACTS.filter(function(el) {
+                    var searchValue = el.name.toLowerCase();
+                    return searchValue.indexOf(searchQuery) !== -1;
+                });
+
+                this.setState({
+                    displayedContacts: displayedContacts
+                });
+            },
+
+            render: function() {
+                return (
+                    <div className="contacts">
+                        <input type="text" className="search-field" onChange={this.handleSearch} />
+                        <ul className="contacts-list">
+                            {
+                               this.state.displayedContacts.map(function(el) {
+                                    return <Contact
+                                        key={el.id}
+                                        name={el.name}
+                                        positon={el.positon}
+                                        image={el.image}
+                                        time={el.time}
+                                    />;
+                               })
+                            }
+                        </ul>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <ContactsList />,
+            document.getElementById("content")
+        );
+
+    </script>
+    
+  </body>
+</html>
