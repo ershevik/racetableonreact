@@ -10,42 +10,43 @@ class Example extends React.Component {
       {
         key: 'id',
         name: 'ID',
-        locked: true
+        locked: true,
+        width: 10,
       },
       {
         key: 'task',
         name: 'Title',
-        width: 200,
+        width: 150,
         sortable: true
       },
       {
         key: 'priority',
         name: 'Priority',
-        width: 200,
+        width: 150,
         sortable: true
       },
       {
         key: 'issueType',
         name: 'Issue Type',
-        width: 200,
+        width: 150,
         sortable: true
       },
       {
         key: 'complete',
         name: '% Complete',
-        width: 200,
+        width: 150,
         sortable: true
       },
       {
         key: 'startDate',
         name: 'Start Date',
-        width: 200,
+        width: 150,
         sortable: true
       },
       {
         key: 'completeDate',
         name: 'Expected Complete',
-        width: 200,
+        width: 150,
         sortable: true
       }
     ];
@@ -61,7 +62,7 @@ class Example extends React.Component {
 
   createRows = () => {
     let rows = [];
-    for (let i = 1; i < 1000; i++) {
+    for (let i = 1; i < 6; i++) {
       rows.push({
         id: i,
         task: 'Task ' + i,
@@ -101,7 +102,7 @@ class Example extends React.Component {
         columns={this._columns}
         rowGetter={this.rowGetter}
         rowsCount={this.state.rows.length}
-        minHeight={500} />);
+       />);
   }
 }
 
